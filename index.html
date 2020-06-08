@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+    </head>
+    <body>
+        <div>
+            <h1>Player Wins</h1>
+            <ol id="pwins">
+            </ol>
+        </div>
+        <div>
+            <h1>Computer Wins</h1>
+            <ol id="cwins">
+            </ol>
+        </div>
+    </body>
+</html>
+<script>
+
+    var playerSelection = "";
+    var computerSelection = 0;
+    var index = 0;
+    while(index < 5)
+    {
+        //wait(500);
+        game();
+        index++;
+    }  
+    
+    function incrementWinCounter(winner)
+    {
+        if(winner == "player")
+        {
+            var x = document.getElementById("pwins");
+            var new_win = document.createElement("li");
+
+            var win_text = document.createTextNode("win");
+            new_win.appendChild(win_text);
+            x.appendChild(new_win);
+        }
+        else if(winner == "computer")
+        {
+            var x = document.getElementById("cwins");
+            var new_win = document.createElement("li");
+
+            var win_text = document.createTextNode("win");
+            new_win.appendChild(win_text);
+            x.appendChild(new_win);
+        }
+        var return_string = (winner + "wins!");
+        return return_string;
+    }
+    function playRound( playerSelection, computerSelection )
+    {
+        var playerSel = playerSelection.toLowerCase();
+        var computerSel = computerSelection.toLowerCase();
+        var responseString = "";
+        //debugger;
+        if(computerSel == "rock" && playerSel == "scissors")
+        {
+            responseString = incrementWinCounter("computer");
+        }
+        else if(computerSel == "rock" && playerSel == "paper")
+        {
+            responseString = incrementWinCounter("player");
+        }
+        else if(computerSel == "paper" && playerSel == "rock")
+        {
+            responseString = incrementWinCounter("computer");
+        }
+        else if(computerSel == "paper" && playerSel == "scissors")
+        {
+            responseString = incrementWinCounter("player");
+        }
+        else if(computerSel == "scissors" && playerSel == "paper")
+        {
+            responseString = incrementWinCounter("computer");
+        }
+        else if(computerSel == "scissors" && playerSel == "rock")
+        {
+            responseString = incrementWinCounter("player");
+        }
+        
+        return responseString;
+    }
+
+    function game()
+    {
+        //debugger;
+        playerSelection = "";
+        computerSelection = 0;
+        var playerSelection = prompt("ROCK, PAPER, OR SCISSORS?");
+
+        computerSelection = Math.floor(Math.random() * 3) + 1;
+        //console.log(computerSelection);
+        //debugger;
+        if(computerSelection == 1)
+        {
+            computerSelection = "Rock";
+        }
+        else if(computerSelection == 2 )
+        {
+            computerSelection = "Paper";
+        }
+        else if(computerSelection == 3 )
+        {
+            computerSelection = "Scissors";
+        }
+
+        //debugger;
+        var wintext = "";
+        if(computerSelection != playerSelection)
+        {
+            wintext = playRound(playerSelection, computerSelection);
+        }
+        console.log(wintext);
+    }
+   
+    
+
+    //console.log(playRound(playerSelection, computerSelection));
+</script>
